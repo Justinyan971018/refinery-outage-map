@@ -20,7 +20,7 @@ function safe(s){return String(s??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'
 function numeric(x){if(typeof x==='number')return x;return Number(String(x??'').replace(/,/g,''));}
 async function reload(){statusEl.textContent='正在读取 map data 工作表…';try{
  if(typeof Excel==='undefined'||typeof Office==='undefined'){throw new Error('请在Excel加载项中打开（不能直接在普通浏览器中读取Excel）。');}
- const data=await Excel.run(async ctx=>{const s=ctx.workbook.worksheets.getItem('map data');const r=s.getUsedRange();r.load('values');await ctx.sync();return r.values;});
+ const data=await Excel.run(async ctx=>{const s=ctx.workbook.worksheets.getItem('outage data');const r=s.getUsedRange();r.load('values');await ctx.sync();return r.values;});
  if(!data?.length)throw new Error('map data 工作表为空。');
  const headers=data[0].map(x=>String(x).trim().toLowerCase());
  const index=(key)=>headers.indexOf(key.toLowerCase());
